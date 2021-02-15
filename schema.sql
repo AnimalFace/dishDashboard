@@ -17,10 +17,11 @@ CREATE TABLE users (
 CREATE TABLE recipes (
   id serial primary key,
   title varchar(100),
+  meal varchar(10),
+  cookTime varchar(20)
   intro text,
   steps text[],
-  closingComments text,
-  meal varchar(10),
+  closer text,
   keto boolean,
   lowCarb boolean,
   vegitarian boolean,

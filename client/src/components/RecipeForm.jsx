@@ -72,12 +72,12 @@ class RecipeForm extends React.Component {
             {<textarea className="form-textarea" name="instructions" placeholder="Instructions + to add a step" onChange={this.handleInput}></textarea>}<br></br>
 
             <textarea className="form-textarea" name="closer" placeholder="Closer" onChange={this.handleInput}></textarea><br></br>
-            <label for="keto">Keto</label>
-            <input type="checkbox" name="keto" value={true} onChange={this.handleInput}></input>
             <label for="lowCarb">Low-Carb</label>
             <input type="checkbox" name="lowCarb" value={true} onChange={this.handleInput}></input>
             <label for="vegetarian">Vegetarian</label>
             <input type="checkbox" name="vegetarian" value={true} onChange={this.handleInput}></input>
+            <label for="keto">Keto</label>
+            <input type="checkbox" name="keto" value={true} onChange={this.handleInput}></input>
             <br></br>
             <button className="form-submit-button" type="submit">Create Recipe</button>
           </form>
