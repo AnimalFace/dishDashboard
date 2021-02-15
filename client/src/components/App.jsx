@@ -1,6 +1,6 @@
 import React from 'react';
 // import RecipeSearch from './RecipeSearch.jsx';
-// import RecipeForm from './RecipeForm.jsx';
+import RecipeForm from './RecipeForm.jsx';
 // import Recipe from './Recipe.jsx';
 // import GroceryListSearch from './GroceryListSearch.jsx';
 // import GroceryList from './GroceryList.jsx';
@@ -11,7 +11,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      view: 'test',
+      view: 'createRecipe',
       recipe: null,
       groceryList: null,
       user: 'testUser',
@@ -41,8 +41,9 @@ class App extends React.Component {
     const {view} = this.state;
     // if (view === 'recipeSearch') {
     //   return <RecipeSearch />
-    // } else if (view === 'createRecipe'){
-    //   return <RecipeForm />
+    // } else
+     if (view === 'createRecipe'){
+      return <RecipeForm />
     // } else if (view === 'recipe') {
     //   return <Recipe />
     // } else if (view === 'groceryListSearch') {
@@ -50,8 +51,8 @@ class App extends React.Component {
     // } else if (view === 'groceryList') {
     //   return <GroceryList />
     // } else
-     if (view === 'test') {
-      return <div>test</div>
+    //  if (view === 'test') {
+    //   return <div>test</div>
     }
   }
 

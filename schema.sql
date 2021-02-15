@@ -11,12 +11,12 @@ CREATE DATABASE dishDirectory;
 
 CREATE TABLE users (
   id serial primary key,
-  username varchar(80)
+  username varchar(26)
 );
 
 CREATE TABLE recipes (
   id serial primary key,
-  title varchar(80),
+  title varchar(100),
   intro text,
   steps text[],
   closingComments text,
@@ -29,7 +29,8 @@ CREATE TABLE recipes (
 
 CREATE TABLE items (
   id serial primary key,
-  itemName varchar(40)
+  item varchar(40),
+  details
 );
 
 CREATE TABLE ingredients (

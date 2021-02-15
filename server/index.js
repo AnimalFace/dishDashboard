@@ -5,7 +5,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const path = require('path');
 
-const DishDirectoryController = require('./controllers/DishDirectoryController.js');
+const DishDashboardController = require('./controllers/DishDashboardController.js');
 
 const port = 3000;
 
@@ -14,10 +14,10 @@ app.use(bodyParser.json());
 
 app.use('/', express.static(path.join(__dirname, '../client/dist')));
 
-// app.get('/api/', DishDirectoryController.get);
+// app.get('/api/', DishDashboardController.get);
 
 
 app.listen(port, () => {
   // eslint-disable-next-line no-console
-  console.log('DishDir is listening on port:', port);
+  console.log('DishDB is listening on port:', port);
 });
