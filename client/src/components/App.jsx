@@ -1,5 +1,6 @@
 import React from 'react';
 import Home from './Home.jsx';
+import UserRecipes from './UserRecipes.jsx';
 import RecipeSearch from './RecipeSearch.jsx';
 import RecipeForm from './RecipeForm.jsx';
 import Recipe from './Recipe.jsx';
@@ -19,6 +20,9 @@ class App extends React.Component {
       recipes: [],
       groceryLists: null
     };
+    this.getRecipesByUser = this.getRecipesByUser.bind(this);
+    this.getRecipeByNameAndUser = this.getRecipeByNameAndUser.bind(this);
+    this.submitRecipe = this.submitRecipe.bind(this);
   }
 
   componentDidMount() {
@@ -38,14 +42,27 @@ class App extends React.Component {
     });
   }
 
+  getRecipeByNameAndUser(userAndRecipe, callback) {
+    ajax({
+      type: 'GET',
+      url: `/api/user/${userAndRecipe.userId}/recipes/${userAndRecipe.recipe}`,
+      dataType: 'json',
+      success: (response) => {
+        this.setState({
+          recipe: response.rows[0]
+        })
+      }
+    });
+  }
+
   submitRecipe(recipe, callback) {
     ajax({
       type: 'POST',
       url:'/api/recipes/submit',
       data: recipe,
       success: () => {
-        this.getRecipesByUser(1, ()=>{});
-        this.setState({view: 'home'});
+        this.getRecipeByNameAndUser({recipe: 'Spaghetti', userId: 1}, ()=>{});
+        this.setState({view: 'recipe'});
       },
       error: console.log,
     });
@@ -58,15 +75,17 @@ class App extends React.Component {
   }
 
   renderView() {
-    const { view, userId} = this.state;
+    const { view, userId, recipes, recipe} = this.state;
     if (view === 'home') {
       return <Home />
+    } else if (view === 'userRecipes') {
+      return <UserRecipes recipes={recipes} />
     } else if (view === 'recipeSearch') {
       return <RecipeSearch />
     } else if (view === 'createRecipe'){
       return <RecipeForm userId={userId} submitHandler={this.submitRecipe}/>
     } else if (view === 'recipe') {
-      return <Recipe />
+      return <Recipe recipe={recipe}/>
     } else if (view === 'groceryListSearch') {
       return <GroceryListSearch />
     } else if (view === 'groceryList') {

@@ -11,6 +11,16 @@ const getRecipesByUser = (request, response) => {
   })
 }
 
+const getRecipeByNameAndUser = (request, response) => {
+  DishDashboardModel.getRecipeByNameAndUser(request.params, (err, recipe) => {
+    if (err) {
+      response.status(400).send(err)
+    } else {
+      response.status(200).send(recipe)
+    }
+  })
+}
+
 const submitRecipe = (request, response) => {
   const recipe = request.body;
   DishDashboardModel.submitRecipe(recipe, (err, data) => {
@@ -24,5 +34,6 @@ const submitRecipe = (request, response) => {
 
 module.exports = {
   getRecipesByUser,
+  getRecipeByNameAndUser,
   submitRecipe
 }

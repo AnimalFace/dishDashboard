@@ -16,6 +16,7 @@ app.use(bodyParser.json());
 app.use('/', express.static(path.join(__dirname, '../client/dist')));
 
 app.get('/api/user/:userId/recipes', DishDashboardController.getRecipesByUser);
+app.get('/api/user/:userId/recipes/:recipeTitle', DishDashboardController.getRecipeByNameAndUser);
 
 app.post('/api/recipes/submit', DishDashboardController.submitRecipe);
 
