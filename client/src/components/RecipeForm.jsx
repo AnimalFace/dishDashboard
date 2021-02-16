@@ -61,7 +61,13 @@ class RecipeForm extends React.Component {
     //   })
     // })
     const capitalizedIngredient = ingredientToAdd.charAt(0).toUpperCase() + ingredientToAdd.slice(1);
-    const updatedIngredients = ingredients.concat([capitalizedIngredient]);
+    const updatedIngredients = [];
+    for (let i = 0; i < ingredients.length; i ++) {
+      let currentIngredient = ingredients[i];
+      updatedIngredients.push(currentIngredient);
+    }
+    updatedIngredients.push(capitalizedIngredient);
+
     this.setState({
       ingredients: updatedIngredients,
       ingredientToAdd: ''
@@ -73,11 +79,28 @@ class RecipeForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     const { title, meal, cookTime, ingredients, intro, instructions, closer, keto, lowCarb, vegetarian } = this.state;
-    const recipe = { title, meal, cookTime, ingredients, intro, instructions, closer, keto, lowCarb, vegetarian };
-    console.log('recipe:', recipe);
-    console.log('this.state:', this.state);
+    const { userId } = this.props;
+    const instructionsArray = [];
+    for (let i = 0; i < Object.values(instructions).length; i++) {
+      instructionsArray[i] = instructions[i];
+    }
+    const recipe = {
+      title: title,
+      meal: meal,
+      cookTime: cookTime,
+      'ingredients': ingredients,
+      intro: intro,
+      'instructions': instructionsArray,
+      closer: closer,
+      keto: keto,
+      lowCarb: lowCarb,
+      vegetarian: vegetarian,
+      userId: userId
+    };
 
-    // this.props.submitHandler(recipe, () => {
+    console.log('recipe:', recipe);
+
+    this.props.submitHandler(recipe, () => {
       this.setState({
         title: '',
         meal: '',
@@ -93,7 +116,7 @@ class RecipeForm extends React.Component {
         currentStep: null,
         ingredientToAdd: null
       })
-    // })
+    })
     $('.recipe-form')[0].reset();
   }
 

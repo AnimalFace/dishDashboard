@@ -1,4 +1,4 @@
-DROP DATABASE IF EXISTS dishDirectory;
+DROP DATABASE IF EXISTS dishDashboard;
 
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS recipes;
@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS ingredients;
 DROP TABLE IF EXISTS favorites;
 DROP TABLE IF EXISTS groceryLists;
 
-CREATE DATABASE dishDirectory;
+CREATE DATABASE dishDashboard;
 
 CREATE TABLE users (
   id serial primary key,
@@ -18,20 +18,21 @@ CREATE TABLE recipes (
   id serial primary key,
   title varchar(100),
   meal varchar(10),
-  cookTime varchar(20)
+  cookTime varchar(20),
+  ingredients text[],
   intro text,
-  steps text[],
+  instructions text[],
   closer text,
   keto boolean,
   lowCarb boolean,
-  vegitarian boolean,
+  vegetarian boolean,
   creatorId int REFERENCES users (id)
 );
 
 CREATE TABLE items (
   id serial primary key,
   item varchar(40),
-  details
+  details text
 );
 
 CREATE TABLE ingredients (

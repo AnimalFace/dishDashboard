@@ -1,11 +1,12 @@
 const express = require('express');
+const DishDashboardController = require('./controllers/DishDashboardController.js')
 
 const app = express();
 
 const bodyParser = require('body-parser');
 const path = require('path');
 
-const DishDashboardController = require('./controllers/DishDashboardController.js');
+
 
 const port = 3000;
 
@@ -14,7 +15,9 @@ app.use(bodyParser.json());
 
 app.use('/', express.static(path.join(__dirname, '../client/dist')));
 
-// app.get('/api/', DishDashboardController.get);
+app.get('/api/user/:userId/recipes', DishDashboardController.getRecipesByUser);
+
+app.post('/api/recipes/submit', DishDashboardController.submitRecipe);
 
 
 app.listen(port, () => {
