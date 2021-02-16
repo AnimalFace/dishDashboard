@@ -57,7 +57,7 @@ CREATE TABLE groceryLists (
 CREATE INDEX recipes_creator_index ON recipes (creatorId);
 CREATE INDEX recipes_keto_index ON recipes (keto);
 CREATE INDEX recipes_lowCarb_index ON recipes (lowCarb);
-CREATE INDEX recipes_vegitarian_index ON recipes (vegitarian);
+CREATE INDEX recipes_vegetarian_index ON recipes (vegetarian);
 CREATE INDEX recipes_meal_index ON recipes (meal);
 
 CREATE INDEX ingredients_item_index ON ingredients (itemId);
