@@ -84,9 +84,10 @@ class RecipeForm extends React.Component {
     for (let i = 0; i < Object.values(instructions).length; i++) {
       instructionsArray[i] = instructions[i];
     }
-    // const instructionsString = '{' + instructionsArray.join(', ') + '}';
-    const instructionsString = `{'${instructionsArray.join(`', '`)}'}`;
-    const ingredientsString = `{'${ingredients.join(`', '`)}'}`;
+    const instructionsString = '[' + instructionsArray.join(', ') + ']';
+    const ingredientsString = `['` + ingredients.join("', '") + `']`;
+    // const instructionsString = `{'${instructionsArray.join(`', '`)}'}`;
+    // const ingredientsString = `{'${ingredients.join(`', '`)}'}`;
     const recipe = {
       title: title,
       meal: meal,
