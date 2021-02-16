@@ -7,10 +7,25 @@ const getRecipesByUser = (userId, callback) => {
 
 const submitRecipe = (recipe, callback) => {
   const { title, meal, cookTime, ingredients, intro, instructions, closer, keto, lowCarb, vegetarian, userId } = recipe;
-  console.log('ingredients', `${ingredients}`);
-  console.log('recipemodel', recipe);
 
-  const q = `INSERT INTO recipes(title, meal, cookTime, ingredients, intro, instructions, closer, keto, lowCarb, vegetarian, creatorId) VALUES('${title}', '${meal}', '${cookTime}', ${ingredients}, ${intro}, ${instructions}, ${closer}, ${keto}, ${lowCarb}, ${vegetarian}, ${userId})`
+  const ketoB = JSON.parse(keto);
+  const lowCarbB = JSON.parse(lowCarb);
+  const vegetarianB = JSON.parse(vegetarian);
+
+  console.log('ingredients', ingredients);
+  console.log('instructions', instructions);
+
+  const ingredientsArray = ingredients.split(',');
+  console.log('ingredientsArr', ingredientsArray);
+  const instructionsArray = instructions.split(',');
+  console.log('instructionsArr', instructionsArray);
+
+  const formatedIngredients = ingredientsArray.join("', '");
+  const formatedInstructions = instructionsArray.join("', '");
+
+
+  const q = `INSERT INTO recipes(title, meal, cookTime, ingredients, intro, instructions, closer, keto, lowCarb, vegetarian, creatorId) VALUES('${title}', '${meal}', '${cookTime}', ARRAY['${formatedIngredients}'], '${intro}', ARRAY['${formatedInstructions}'], '${closer}', ${ketoB}, ${lowCarbB}, ${vegetarianB}, ${userId})`;
+  console.log('query: ', q);
   db.query(q, callback);
 }
 

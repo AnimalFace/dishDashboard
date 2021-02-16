@@ -44,7 +44,7 @@ class App extends React.Component {
       url:'/api/recipes/submit',
       data: recipe,
       success: () => {
-        this.getRecipesByUser();
+        this.getRecipesByUser(1, ()=>{});
         this.setState({view: 'home'});
       },
       error: console.log,

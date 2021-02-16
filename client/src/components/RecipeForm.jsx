@@ -84,8 +84,15 @@ class RecipeForm extends React.Component {
     for (let i = 0; i < Object.values(instructions).length; i++) {
       instructionsArray[i] = instructions[i];
     }
-    const instructionsString = '[' + instructionsArray.join(', ') + ']';
-    const ingredientsString = `['` + ingredients.join("', '") + `']`;
+    // const instructionsString = `['` + instructionsArray.join("', '") + `']`;
+    // const ingredientsString = `['` + ingredients.join("', '") + `']`;
+
+    const ingredientsString = `${ingredients.join(",")}`;
+    const instructionsString = `${instructionsArray.join(",")}`;
+
+
+    // const instructionsString = `[` + instructionsArray.join(", ") + `]`;
+    // const ingredientsString = `[` + ingredients.join(", ") + `]`;
     // const instructionsString = `{'${instructionsArray.join(`', '`)}'}`;
     // const ingredientsString = `{'${ingredients.join(`', '`)}'}`;
     const recipe = {
@@ -101,8 +108,6 @@ class RecipeForm extends React.Component {
       vegetarian: vegetarian,
       userId: userId
     };
-
-    console.log('recipe:', recipe);
 
     this.props.submitHandler(recipe, () => {
       this.setState({
