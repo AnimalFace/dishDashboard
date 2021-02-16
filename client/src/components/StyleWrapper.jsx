@@ -22,6 +22,10 @@ const StyleWrapper = styled.div`
     .main {
 
     }
+
+    .instruction-step {
+  /* list-style-type: none; */
+    }
 `;
 
 export default StyleWrapper;
