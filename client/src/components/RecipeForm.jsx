@@ -1,4 +1,5 @@
 import React from 'react';
+import $ from 'jquery';
 
 class RecipeForm extends React.Component {
   constructor(props) {
@@ -59,24 +60,29 @@ class RecipeForm extends React.Component {
     //     ingredient: ''
     //   })
     // })
-    const updatedIngredients = ingredients.concat([ingredientToAdd]);
+    const capitalizedIngredient = ingredientToAdd.charAt(0).toUpperCase() + ingredientToAdd.slice(1);
+    const updatedIngredients = ingredients.concat([capitalizedIngredient]);
     this.setState({
       ingredients: updatedIngredients,
       ingredientToAdd: ''
     });
-
+    $('.ingredient-input').val('');
 
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    const recipe = this.state;
-    this.props.submitHandler(recipe, () => {
+    const { title, meal, cookTime, ingredients, intro, instructions, closer, keto, lowCarb, vegetarian } = this.state;
+    const recipe = { title, meal, cookTime, ingredients, intro, instructions, closer, keto, lowCarb, vegetarian };
+    console.log('recipe:', recipe);
+    console.log('this.state:', this.state);
+
+    // this.props.submitHandler(recipe, () => {
       this.setState({
         title: '',
         meal: '',
         cookTime: '',
-        ingredients: '',
+        ingredients: [],
         intro: '',
         instructions: {},
         closer: '',
@@ -84,9 +90,11 @@ class RecipeForm extends React.Component {
         lowCarb: false,
         vegetarian: false,
         steps: [1],
-        currentStep: null
+        currentStep: null,
+        ingredientToAdd: null
       })
-    })
+    // })
+    $('.recipe-form')[0].reset();
   }
 
   addStep() {
@@ -107,10 +115,9 @@ class RecipeForm extends React.Component {
   render() {
     const { steps, ingredients } = this.state;
     return (
-      <div className="recipeForm">
-        <div className="recipe-editor">
+        <div className="recipe-creator">
           <h2>New Recipe</h2>
-          <form onSubmit={this.handleSubmit}>
+          <form className="recipe-form" onSubmit={this.handleSubmit}>
             <input className="form-input" type="text" name="title" placeholder="Recipe Title" onChange={this.handleInput}></input><br></br>
 
             <select className="meal-select" name="meal" onChange={this.handleInput}>
@@ -134,8 +141,10 @@ class RecipeForm extends React.Component {
               <option value="over24">More than a day</option>
             </select><br></br>
 
-            <textarea className="form-textarea" name="intro" placeholder="Intro" onChange={this.handleInput}></textarea><br></br>
 
+            <input className="ingredient-input" type="text" name="ingredientToAdd" placeholder="Search and Add Ingredients" onChange={this.handleInput}></input>
+            <button className="ingredient-search-button" type="button" onClick={this.searchIngredients}>Add / Search</button>
+            <br></br>
             <div className="ingredients-view">
               <ul className="ingredients-list">
                 {ingredients.map(ingredient => {
@@ -145,9 +154,10 @@ class RecipeForm extends React.Component {
                 })}
               </ul>
             </div>
-            <input className="ingredient-input" type="text" name="ingredientToAdd" placeholder="Search and Add Ingredients" onChange={this.handleInput}></input>
-            <button className="ingredient-search-button" type="button" onClick={this.searchIngredients}>Add / Search</button>
-            <br></br>
+
+            <textarea className="form-textarea" name="intro" placeholder="Intro" onChange={this.handleInput}></textarea><br></br>
+
+
             <ol>
               {
                 steps.map(step => {
@@ -159,22 +169,22 @@ class RecipeForm extends React.Component {
                 })
               }
             </ol>
-            <button className="remove-step-button" type="button" onClick={() => (this.removeStep())}>Remove a Step!</button>
+            {/* <button className="remove-step-button" type="button" onClick={() => (this.removeStep())}>Remove a Step!</button> */}
             <button className="add-step-button" type="button" onClick={() => (this.addStep())}>Add a Step!</button><br></br>
 
 
             <textarea className="form-textarea" name="closer" placeholder="Closer" onChange={this.handleInput}></textarea><br></br>
-            <label for="lowCarb">Low-Carb</label>
+
             <input type="checkbox" name="lowCarb" value={true} onChange={this.handleInput}></input>
-            <label for="vegetarian">Vegetarian</label>
+            <label for="lowCarb">Low-Carb</label>
             <input type="checkbox" name="vegetarian" value={true} onChange={this.handleInput}></input>
-            <label for="keto">Keto</label>
+            <label for="vegetarian">Vegetarian</label>
             <input type="checkbox" name="keto" value={true} onChange={this.handleInput}></input>
+            <label for="keto">Keto</label>
             <br></br>
             <button className="form-submit-button" type="submit">Create Recipe</button>
           </form>
         </div>
-      </div>
     )
   }
 
