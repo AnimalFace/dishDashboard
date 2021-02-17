@@ -16,7 +16,7 @@ class Recipe extends React.Component {
   render() {
 
     if (this.props.recipe) {
-      const { id, title, meal, cooktime, ingredients, intro, instructions, closer, keto, lowCarb, vegetarian, creatorId } = this.props.recipe;
+      const { id, title, meal, cooktime, ingredients, intro, instructions, closer, keto, lowcarb, vegetarian, creatorId } = this.props.recipe;
       return (
         <div className="recipe">
 
@@ -45,7 +45,7 @@ class Recipe extends React.Component {
         <p>{closer}</p>
 
         <p>{this.renderTag(keto, '*keto')}</p>
-        <p>{this.renderTag(lowCarb, '*lowCarb')}</p>
+        <p>{this.renderTag(lowcarb, '*lowCarb')}</p>
         <p>{this.renderTag(vegetarian, '*vegetarian')}</p>
         </div>
       )

@@ -9,9 +9,16 @@ class Home extends React.Component {
   }
 
   render() {
+    const { recipes } = this.props;
     return (
       <div className="home">
       <h2>Home</h2>
+      <h3>My Recipes</h3>
+      <ul>
+        {recipes.map(recipe => {
+          return (<li>{recipe.title}</li>)
+        })}
+      </ul>
       </div>
     )
   }

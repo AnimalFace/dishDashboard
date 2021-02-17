@@ -18,7 +18,8 @@ class App extends React.Component {
       groceryList: null,
       userId: 1,
       recipes: [],
-      groceryLists: null
+      groceryLists: null,
+      submittedRecipeTitle: null
     };
     this.getRecipesByUser = this.getRecipesByUser.bind(this);
     this.getRecipeByNameAndUser = this.getRecipeByNameAndUser.bind(this);
@@ -26,7 +27,8 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-
+    const { userId } = this.state;
+    this.getRecipesByUser(userId, ()=>{});
   }
 
   getRecipesByUser(userId, callback) {
@@ -77,7 +79,7 @@ class App extends React.Component {
   renderView() {
     const { view, userId, recipes, recipe} = this.state;
     if (view === 'home') {
-      return <Home />
+      return <Home recipes={recipes}/>
     } else if (view === 'userRecipes') {
       return <UserRecipes recipes={recipes} />
     } else if (view === 'recipeSearch') {
